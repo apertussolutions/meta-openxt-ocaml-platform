@@ -1,8 +1,17 @@
-Index: ocaml-4.04.2/configure
-===================================================================
---- ocaml-4.04.2.orig/configure
-+++ ocaml-4.04.2/configure
-@@ -559,6 +559,15 @@ if test "$?" -eq 0; then
+--- a/configure
++++ b/configure
+@@ -378,8 +378,8 @@ TOOLCHAIN="cc"
+ # gnu11, which is fine.
+ 
+ case "$ocamlversion" in
+-  *+dev*) gcc_warnings="-Wall -Werror";;
+-       *) gcc_warnings="-Wall";;
++  *+dev*) gcc_warnings="-Wall -Werror -Wno-restrict -Wno-stringop-truncation";;
++       *) gcc_warnings="-Wall -Wno-restrict -Wno-stringop-truncation";;
+ esac
+ 
+ case "$ccfamily" in
+@@ -605,6 +605,15 @@ if test "$?" -eq 0; then
  else
    # For cross-compilation, runtest always fails: add special handling.
    case "$target" in
@@ -18,7 +27,7 @@ Index: ocaml-4.04.2/configure
      i686-*-mingw*) inf "OK, this is a regular 32 bit architecture."
                     echo "#undef ARCH_SIXTYFOUR" >> m.h
                     set 4 4 4 2 8
-@@ -604,6 +613,8 @@ case $? in
+@@ -650,6 +659,8 @@ case $? in
    2) err "This architecture seems to be neither big endian nor little" \
           "endian.\n OCaml won't run on this architecture.";;
    *) case $target in
@@ -27,7 +36,7 @@ Index: ocaml-4.04.2/configure
         *-*-mingw*) inf "This is a little-endian architecture."
                     echo "#undef ARCH_BIG_ENDIAN" >> m.h;;
         *) wrn "Something went wrong during endianness determination.\n" \
-@@ -639,6 +650,8 @@ case "$target" in
+@@ -685,6 +696,8 @@ case "$target" in
        1) inf "Doubles must be doubleword-aligned."
           echo "#define ARCH_ALIGN_DOUBLE" >> m.h;;
        *) case "$target" in
@@ -36,7 +45,7 @@ Index: ocaml-4.04.2/configure
             *-*-mingw*) inf "Doubles can be word-aligned."
                         echo "#undef ARCH_ALIGN_DOUBLE" >> m.h;;
             *) wrn "Something went wrong during alignment determination for" \
-@@ -661,6 +674,8 @@ case "$target" in
+@@ -707,6 +720,8 @@ case "$target" in
        inf "64-bit integers must be doubleword-aligned."
        echo "#define ARCH_ALIGN_INT64" >> m.h
      fi;;
@@ -45,3 +54,15 @@ Index: ocaml-4.04.2/configure
    *-*-mingw*) true;; # Nothing is in config/m-nt.h so don't add anything.
    *)
      sh ./runtest int64align.c
+@@ -1537,11 +1552,6 @@ if sh ./hasgot pipe2; then
+   echo "#define HAS_PIPE2" >> s.h
+ fi
+ 
+-if sh ./hasgot accept4; then
+-  inf "accept4() found"
+-  echo "#define HAS_ACCEPT4" >> s.h
+-fi
+-
+ # Determine if the debugger is supported
+ 
+ if test -n "$with_debugger"; then

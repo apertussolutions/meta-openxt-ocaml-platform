@@ -1,0 +1,22 @@
+--- a/internal/unimap.ml
++++ b/internal/unimap.ml
+@@ -100,7 +100,7 @@ let ucs_to_enc map ucs = read_map map.uc
+ 
+ let loaded = Hashtbl.create 0
+ 
+-let of_name name =
++let of_name name : t =
+   try 
+     let b = Hashtbl.find loaded name in
+     match Weak.get b 0 with
+--- a/public/uCharInfo.ml
++++ b/public/uCharInfo.ml
+@@ -566,7 +566,7 @@ type special_casing_property =
+ 
+ let cache = Weak.create 1
+ 
+-let load_conditional_casing_tbl () =
++let load_conditional_casing_tbl () : special_casing_property list UCharTbl.t =
+   match Weak.get cache 0 with
+     Some t -> t
+   | None ->
