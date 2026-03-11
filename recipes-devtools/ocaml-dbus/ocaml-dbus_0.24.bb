@@ -19,6 +19,7 @@ SRC_URI = " \
     file://fix-memleak.patch \
     file://fix-multithread.patch \
     file://fix-build-dependencies.patch \
+    file://remove-blocking.patch \
     file://static-only.patch \
 "
 SRC_URI[md5sum] = "b769af9141a5c073056ed46ef76ba5be"

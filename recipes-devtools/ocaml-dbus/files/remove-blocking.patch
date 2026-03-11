@@ -1,0 +1,33 @@
+--- a/dbus_stubs.c
++++ b/dbus_stubs.c
+@@ -530,9 +530,7 @@ value stub_dbus_connection_read_write(va
+ {
+ 	CAMLparam2(bus, timeout);
+ 	dbus_bool_t b;
+-	caml_enter_blocking_section();
+ 	b = dbus_connection_read_write(DBusConnection_val(bus), Int_val(timeout));
+-	caml_leave_blocking_section();
+ 	CAMLreturn(Val_bool(b));
+ }
+ 
+@@ -540,10 +538,8 @@ value stub_dbus_connection_read_write_di
+ {
+ 	CAMLparam2(bus, timeout);
+ 	dbus_bool_t b;
+-	caml_enter_blocking_section();
+ 	b = dbus_connection_read_write_dispatch(DBusConnection_val(bus),
+ 	                                        Int_val(timeout));
+-	caml_leave_blocking_section();
+ 	CAMLreturn(Val_bool(b));
+ }
+ 
+@@ -556,9 +552,7 @@ value stub_dbus_connection_pop_message(v
+ 	msg_opt = Val_none;
+ 	msg = Val_unit;
+ 
+-	caml_enter_blocking_section();
+ 	c_msg = dbus_connection_pop_message(DBusConnection_val(bus));
+-	caml_leave_blocking_section();
+ 	if (c_msg) {
+ 		voidstar_alloc(msg, c_msg, finalize_dbus_message);
+ 		caml_alloc_some(msg_opt, msg);
