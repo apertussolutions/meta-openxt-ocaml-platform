@@ -61,18 +61,18 @@ Index: ocaml-4.04.2/Makefile
  
  COMPLIBDIR=$(LIBDIR)/compiler-libs
 @@ -225,7 +261,7 @@ install:
- 	  dllunix$(EXT_DLL) dllgraphics$(EXT_DLL) dllstr$(EXT_DLL)
- 	cd byterun; $(MAKE) install
- 	cp ocamlc $(INSTALL_BINDIR)/ocamlc.byte$(EXE)
--	cp ocaml $(INSTALL_BINDIR)/ocaml$(EXE)
-+	cp ocaml $(INSTALL_BINDIR)/ocaml$(EXE) || true # Not for cross comp.
- 	cd stdlib; $(MAKE) install
- 	cp lex/ocamllex $(INSTALL_BINDIR)/ocamllex.byte$(EXE)
- 	cp $(CAMLYACC)$(EXE) $(INSTALL_BINDIR)/ocamlyacc$(EXE)
+ 	$(MKDIR) "$(INSTALL_COMPLIBDIR)"
+ 	cp VERSION "$(INSTALL_LIBDIR)"
+ 	$(MAKE) -C byterun install
+-	cp ocaml "$(INSTALL_BINDIR)/ocaml$(EXE)"
++	cp ocaml "$(INSTALL_BINDIR)/ocaml$(EXE)" || true # Not for cross comp.
+ 	cp ocamlc "$(INSTALL_BINDIR)/ocamlc.byte$(EXE)"
+ 	$(MAKE) -C stdlib install
+ 	cp lex/ocamllex "$(INSTALL_BINDIR)/ocamllex.byte$(EXE)"
 @@ -778,5 +814,6 @@ distclean:
- .PHONY: ocamltoolsopt.opt ocamlyacc opt-core opt opt.opt otherlibraries
- .PHONY: otherlibrariesopt package-macosx promote promote-cross
- .PHONY: restore runtime runtimeopt makeruntimeopt world world.opt
+ 	rm -f ocaml ocamlc
+ 	rm -f testsuite/_log
+ 
 +.PHONY: cross-all cross-opt cross-boot
  
  include .depend

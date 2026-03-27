@@ -15,11 +15,12 @@ OPV = "${@"${PV}".replace('+', '-')}"
 SRC_URI = " \
     https://github.com/ocaml/camlp4/archive/${PV}.tar.gz \
 "
-SRC_URI[md5sum] = "305f61ffd98c4c03eb0d9b7749897e59"
-SRC_URI[sha256sum] = "6044f24a44053684d1260f19387e59359f59b0605cdbf7295e1de42783e48ff1"
+SRC_URI[md5sum] = "0042c09026ce4b3a06d932fee864939a"
+SRC_URI[sha256sum] = "db242c0f4896ddd9dc7d6e8064cba8bf099fb9a4d4f5ed35120978501cd3a935"
 
 DEPENDS = " \
     ocamlbuild-native \
+    coreutils-native \
 "
 
 S = "${WORKDIR}/${BPN}-${OPV}"
