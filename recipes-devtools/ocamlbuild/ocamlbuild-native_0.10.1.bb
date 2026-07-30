@@ -18,6 +18,12 @@ S = "${WORKDIR}/ocamlbuild-${PV}"
 
 inherit native ocaml
 
+# Bytecode ocamlbuild.byte is a custom runtime + appended bytecode. OE's
+# package/sysroot strip removes the bytecode trailer and leaves a bare
+# ocamlrun that rejects every ocamlbuild flag (e.g. -classic-display).
+INHIBIT_PACKAGE_STRIP = "1"
+INHIBIT_SYSROOT_STRIP = "1"
+
 do_configure() {
     oe_runmake configure \
         OCAMLBUILD_PREFIX=${D}${prefix} \
