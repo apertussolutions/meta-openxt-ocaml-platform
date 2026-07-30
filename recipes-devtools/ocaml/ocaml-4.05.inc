@@ -65,6 +65,24 @@ do_configure_append() {
         do
             grep -q "$def" ${S}/config/s.h || echo "#define $def" >> ${S}/config/s.h
         done
+        # hasgot for dlopen often fails on modern hosts (same probe issues),
+        # leaving SUPPORTS_SHARED_LIBRARIES=false and no dll*.so stublibs.
+        # Bytecode tools (camomile data generators) then die with
+        # "dynamic loading not supported" for dllbigarray.
+        if ! grep -q SUPPORT_DYNAMIC_LINKING ${S}/config/s.h; then
+            echo "#define SUPPORT_DYNAMIC_LINKING" >> ${S}/config/s.h
+        fi
+    fi
+    if [ -f ${S}/config/Makefile ]; then
+        sed -i 's/^SUPPORTS_SHARED_LIBRARIES=.*/SUPPORTS_SHARED_LIBRARIES=true/' ${S}/config/Makefile
+        # Ensure MKDLL is usable if the probe flipped support off late.
+        if grep -q 'shared-libs-not-available' ${S}/config/Makefile; then
+            sed -i \
+                -e 's|^MKDLL=.*|MKDLL=gcc -shared|' \
+                -e 's|^MKMAINDLL=.*|MKMAINDLL=gcc -shared|' \
+                -e 's|^SHAREDCCCOMPOPTS=.*|SHAREDCCCOMPOPTS=-fPIC|' \
+                ${S}/config/Makefile
+        fi
     fi
 }
 

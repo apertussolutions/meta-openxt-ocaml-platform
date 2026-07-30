@@ -25,6 +25,14 @@ OCAMLMKLIB_class-target="ocamlmklib -ldopt '--sysroot=${STAGING_DIR_TARGET} ${LD
 EXTRA_OEMAKE_append += ' \
     OCAMLMKLIB="${OCAMLMKLIB}" \
 '
+# yacc/lex must run on the build host. Cross installs put unprefixed
+# ocamlyacc/ocamllex earlier on PATH (usr/bin/${TARGET_SYS}/), and those
+# binaries use the target dynamic linker (e.g. /lib/ld-linux-x86-64.so.2)
+# which is missing on modern hosts — exec fails with ENOENT.
+EXTRA_OEMAKE_append += ' \
+    OCAMLYACC="${STAGING_BINDIR_NATIVE}/ocamlyacc" \
+    OCAMLLEX="${STAGING_BINDIR_NATIVE}/ocamllex" \
+'
 EXTRA_OEMAKE_append_class-target += ' \
     OCAMLC="${OCAMLC}" \
     OCAMLOPT="${OCAMLOPT}" \
