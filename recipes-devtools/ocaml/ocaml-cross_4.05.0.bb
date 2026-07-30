@@ -28,7 +28,10 @@ COMPATIBLE_MACHINE = "(-)"
 COMPATIBLE_MACHINE_x86 = "(.*)"
 COMPATIBLE_MACHINE_x86-64 = "(.*)"
 
-# Speed things up since we assume host is of the same architecture.
+# Use distinct -host (build) vs -target so configure sets cross_compiler=true.
+# Same-arch OE targets previously set -host=${TARGET_SYS} only; that worked when
+# the host dynamic linker path matched the target binary, but fails on modern
+# Debian/Devuan (interpreter /lib/ld-linux-x86-64.so.2 missing; only /lib64/...).
 do_configure_x86() {
     ./configure -no-curses \
                 -no-graph \
@@ -42,7 +45,9 @@ do_configure_x86() {
                 -cc "${TARGET_PREFIX}gcc -fPIC -m32 --sysroot=${STAGING_DIR_TARGET}" \
                 -as "${TARGET_PREFIX}as --32" \
                 -aspp "${TARGET_PREFIX}gcc -fPIC -m32 -c" \
-                -host ${TARGET_SYS} \
+                -host ${BUILD_SYS} \
+                -target ${TARGET_SYS} \
+                -target-bindir ${bindir} \
                 -partialld "ld -r -melf_i386" \
                 ${EXTRA_CONF}
 }
@@ -60,7 +65,9 @@ do_configure_x86-64() {
                 -cc "${TARGET_PREFIX}gcc -fPIC --sysroot=${STAGING_DIR_TARGET}" \
                 -as "${TARGET_PREFIX}as" \
                 -aspp "${TARGET_PREFIX}gcc -c -fPIC" \
-                -host ${TARGET_SYS} \
+                -host ${BUILD_SYS} \
+                -target ${TARGET_SYS} \
+                -target-bindir ${bindir} \
                 -partialld "${TARGET_PREFIX}ld -r" \
                 ${EXTRA_CONF}
 }

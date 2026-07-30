@@ -30,7 +30,10 @@ S = "${WORKDIR}/ocaml_dbus-${PV}"
 inherit ocaml findlib pkgconfig
 
 do_install() {
-    oe_runmake OCAMLDESTDIR="$(ocamlfind printconf destdir)" install
+    # findlib/ocamlrun must be host-native; a cross ocamlrun is incomplete
+    # (e.g. "inet_addr_of_string not implemented") after true cross configure.
+    export PATH="${STAGING_BINDIR_NATIVE}:${PATH}"
+    oe_runmake OCAMLDESTDIR="$(${STAGING_BINDIR_NATIVE}/ocamlfind printconf destdir)" install
 }
 
 INSANE_SKIP_${PN}-dev = "file-rdeps"
