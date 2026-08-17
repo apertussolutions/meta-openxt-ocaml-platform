@@ -1,3 +1,5 @@
+Upstream-Status: Inappropriate [OpenXT]
+
 Index: ocaml-4.04.2/stdlib/Makefile
 ===================================================================
 --- ocaml-4.04.2.orig/stdlib/Makefile

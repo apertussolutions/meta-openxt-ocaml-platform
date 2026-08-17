@@ -1,3 +1,5 @@
+Upstream-Status: Inappropriate [OpenXT]
+
 --- a/dbus_stubs.c
 +++ b/dbus_stubs.c
 @@ -530,9 +530,7 @@ value stub_dbus_connection_read_write(va

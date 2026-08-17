@@ -1,3 +1,5 @@
+Upstream-Status: Inappropriate [OpenXT]
+
 diff --git a/dbus_stubs.c b/dbus_stubs.c
 index ae3f208..8500f38 100644
 --- a/dbus_stubs.c

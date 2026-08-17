@@ -1,3 +1,5 @@
+Upstream-Status: Inappropriate [OpenXT]
+
 --- a/internal/unimap.ml
 +++ b/internal/unimap.ml
 @@ -100,7 +100,7 @@ let ucs_to_enc map ucs = read_map map.uc

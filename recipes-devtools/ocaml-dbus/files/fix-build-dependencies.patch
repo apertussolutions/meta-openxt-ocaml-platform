@@ -1,3 +1,5 @@
+Upstream-Status: Inappropriate [OpenXT]
+
 Index: ocaml_dbus-0.24/Makefile
 ===================================================================
 --- ocaml_dbus-0.24.orig/Makefile

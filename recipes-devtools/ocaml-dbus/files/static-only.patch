@@ -1,3 +1,5 @@
+Upstream-Status: Inappropriate [OpenXT]
+
 --- a/Makefile
 +++ b/Makefile
 @@ -64,12 +64,16 @@ check:

@@ -1,3 +1,5 @@
+Upstream-Status: Inappropriate [OpenXT]
+
 Index: camomile-0.8.5/Makefile.in
 ===================================================================
 --- camomile-0.8.5.orig/Makefile.in
