@@ -24,7 +24,7 @@ S = "${WORKDIR}/camomile-${PV}"
 
 inherit ocaml findlib
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/camomile/charmaps/* \
     ${datadir}/camomile/database/* \
     ${datadir}/camomile/locales/* \
@@ -51,4 +51,4 @@ do_install() {
     oe_runmake DESTDIR="${D}" install
 }
 
-INSANE_SKIP_${PN}-dev = "file-rdeps"
+INSANE_SKIP:${PN}-dev = "file-rdeps"

@@ -6,7 +6,7 @@ inherit native
 # in NATIVECCLIBS. Host bytecode tools then fail on dllbigarray, and host
 # ocamlopt.opt (used by findlib for target links) omits -ldl while asmrun
 # still references dlopen once SUPPORT_DYNAMIC_LINKING is set.
-do_configure_append() {
+do_configure:append() {
     if [ -f ${S}/config/s.h ] && ! grep -q SUPPORT_DYNAMIC_LINKING ${S}/config/s.h; then
         echo "#define SUPPORT_DYNAMIC_LINKING" >> ${S}/config/s.h
     fi

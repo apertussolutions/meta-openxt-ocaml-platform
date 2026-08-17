@@ -32,7 +32,7 @@ do_configure() {
                 -fPIC \
                 ${EXTRA_CONF}
 }
-do_configure_append() {
+do_configure:append() {
     # Turn off stack-protector; inject GCC 14 relax flags into baked opts.
     sed -i'' -re 's/NATIVECCCOMPOPTS=(.*)/NATIVECCCOMPOPTS=\1 -fno-stack-protector -fcommon -Wno-incompatible-pointer-types -Wno-int-conversion/' config/Makefile
     sed -i'' -re 's/BYTECCCOMPOPTS=(.*)/BYTECCCOMPOPTS=\1 -fno-stack-protector -fcommon -Wno-incompatible-pointer-types -Wno-int-conversion/' config/Makefile
