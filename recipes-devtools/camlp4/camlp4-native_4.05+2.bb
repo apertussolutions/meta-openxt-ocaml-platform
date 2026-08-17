@@ -23,7 +23,7 @@ DEPENDS = " \
     coreutils-native \
 "
 
-S = "${WORKDIR}/${BPN}-${OPV}"
+S = "${UNPACKDIR}/${BPN}-${OPV}"
 
 inherit native ocaml
 

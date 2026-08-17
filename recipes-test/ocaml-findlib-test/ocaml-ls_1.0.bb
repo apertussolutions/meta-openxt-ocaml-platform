@@ -8,7 +8,7 @@ SRC_URI = " \
     file://ocaml-ls.ml \
 "
 
-S = "${WORKDIR}/src"
+S = "${UNPACKDIR}/src"
 
 inherit ocaml findlib
 

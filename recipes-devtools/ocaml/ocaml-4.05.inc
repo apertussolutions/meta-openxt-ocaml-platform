@@ -10,7 +10,7 @@ SRC_URI = " \
 SRC_URI[md5sum] = "f13d9a58bcbdcb495016af4f709ebd16"
 SRC_URI[sha256sum] = "04a527ba14b4d7d1b2ea7b2ae21aefecfa8d304399db94f35a96df1459e02ef9"
 
-S = "${WORKDIR}/ocaml-${PV}"
+S = "${UNPACKDIR}/ocaml-${PV}"
 
 # GCC 14 treats incompatible pointer types as errors; OCaml 4.05 needs relax.
 CFLAGS += " \

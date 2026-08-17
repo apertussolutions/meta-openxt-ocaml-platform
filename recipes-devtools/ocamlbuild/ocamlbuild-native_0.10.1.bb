@@ -14,7 +14,7 @@ SRC_URI = " \
 SRC_URI[md5sum] = "000d2ebad1333f9afcccdcd68c19f14d"
 SRC_URI[sha256sum] = "2603be3709634b6191dd00627213cff56f15200f2d0a24e0af58a18a0580b71e"
 
-S = "${WORKDIR}/ocamlbuild-${PV}"
+S = "${UNPACKDIR}/ocamlbuild-${PV}"
 
 inherit native ocaml
 

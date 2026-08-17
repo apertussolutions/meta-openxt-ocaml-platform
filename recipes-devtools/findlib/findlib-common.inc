@@ -8,7 +8,7 @@ HOMEPAGE = "http://projects.camlcity.org/projects/findlib.html"
 SECTION = "ocaml/devel"
 LICENSE = "MIT"
 
-S = "${WORKDIR}/findlib-${PV}"
+S = "${UNPACKDIR}/findlib-${PV}"
 
 inherit ocaml
 
