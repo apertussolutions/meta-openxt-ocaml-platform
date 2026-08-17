@@ -4,9 +4,10 @@ SRC_URI += " \
     file://0001-cross-Add-cross-compilation-rules.patch \
 "
 
+# YP 6.0 / wrynose: cross toolchain virtuals are virtual/cross-{cc,binutils}.
 DEPENDS += " \
-    virtual/${TARGET_PREFIX}binutils \
-    virtual/${TARGET_PREFIX}gcc \
+    virtual/cross-binutils \
+    virtual/cross-cc \
     virtual/libc \
     libgcc \
     ocaml-native \
