@@ -8,7 +8,7 @@ SRC_URI = " \
     file://ocaml-ls.ml \
 "
 
-S = "${UNPACKDIR}/src"
+S = "${UNPACKDIR}"
 
 inherit ocaml findlib
 
@@ -22,4 +22,3 @@ do_install() {
     install -d ${D}${bindir}
     install -m 0755 ${S}/ocaml-ls ${D}${bindir}/ocaml-ls
 }
-UNPACKDIR = "${S}"

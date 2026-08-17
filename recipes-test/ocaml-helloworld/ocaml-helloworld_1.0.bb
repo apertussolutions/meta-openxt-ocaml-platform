@@ -8,7 +8,7 @@ SRC_URI = " \
     file://helloworld.ml \
 "
 
-S = "${UNPACKDIR}/src"
+S = "${UNPACKDIR}"
 
 inherit ocaml
 
@@ -22,4 +22,3 @@ do_install() {
     install -d ${D}${bindir}
     install -m 0755 ${S}/helloworld ${D}${bindir}/helloworld
 }
-UNPACKDIR = "${S}"
