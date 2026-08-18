@@ -23,7 +23,7 @@ OCAMLMKLIB:class-target = "ocamlmklib -ldopt '--sysroot=${STAGING_DIR_TARGET} ${
 
 # Override Makefile variables with oe_runmake.
 EXTRA_OEMAKE:append = ' \
-    OCAMLMKLIB = "${OCAMLMKLIB}" \
+    OCAMLMKLIB="${OCAMLMKLIB}" \
 '
 # yacc/lex must run on the build host. Cross installs put unprefixed
 # ocamlyacc/ocamllex earlier on PATH (usr/bin/${TARGET_SYS}/), and those

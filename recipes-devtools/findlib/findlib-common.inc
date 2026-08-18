@@ -28,7 +28,7 @@ do_compile() {
     oe_runmake opt
 }
 
-EXTRA_OEMAKE:append = "prefix='${D}'"
+EXTRA_OEMAKE:append = " prefix='${D}'"
 do_install() {
     oe_runmake install
 }
