@@ -53,6 +53,9 @@ PARALLEL_MAKE = ""
 do_compile() {
     export OCAMLLIB="${STAGING_LIBDIR_NATIVE}/ocaml"
     export OCAML_TOPLEVEL_PATH="${STAGING_LIBDIR_NATIVE}"
+    # Drop stale cross-linked .byte tools from prior failed builds so make
+    # rebuilds them as host-runnable ocamlrun scripts.
+    rm -f tools/*.byte tools/*.opt
     oe_runmake byte unidata unimaps charmap_data locale_data \
         OCAMLC="${STAGING_BINDIR_NATIVE}/ocamlc" \
         OCAMLOPT="${STAGING_BINDIR_NATIVE}/ocamlopt"
