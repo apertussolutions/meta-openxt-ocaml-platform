@@ -10,8 +10,9 @@ LICENSE = "MIT"
 
 S = "${UNPACKDIR}/findlib-${PV}"
 
-inherit ocaml
+DEPENDS += "m4-native"
 
+inherit ocaml
 do_configure() {
     ./configure \
         -bindir ${bindir} \
