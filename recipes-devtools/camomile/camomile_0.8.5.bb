@@ -43,8 +43,19 @@ do_configure() {
 #  Error: Unbound module <X>
 # This does not happen using camlp4 byte-code instead of native compiled.
 PARALLEL_MAKE = ""
+
+# Database-generation tools must run on the build host. Cross ocamlc
+# custom-links .byte executables with the target dynamic linker
+# (/lib/ld-linux-x86-64.so.2), which is absent on Debian/Ubuntu hosts
+# (see ocaml-cross / ocaml.bbclass). Host-native OCaml produces ocamlrun
+# scripts; bytecode libraries are architecture-independent. Skip `opt`
+# so host-arch .cmxa is not installed into the target sysroot.
 do_compile() {
-    oe_runmake OCAMLOPT="ocamlopt" OCAMLC="ocamlc"
+    export OCAMLLIB="${STAGING_LIBDIR_NATIVE}/ocaml"
+    export OCAML_TOPLEVEL_PATH="${STAGING_LIBDIR_NATIVE}"
+    oe_runmake byte unidata unimaps charmap_data locale_data \
+        OCAMLC="${STAGING_BINDIR_NATIVE}/ocamlc" \
+        OCAMLOPT="${STAGING_BINDIR_NATIVE}/ocamlopt"
 }
 
 do_install() {
