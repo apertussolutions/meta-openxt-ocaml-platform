@@ -12,8 +12,10 @@ SRC_URI[sha256sum] = "04a527ba14b4d7d1b2ea7b2ae21aefecfa8d304399db94f35a96df1459
 
 S = "${UNPACKDIR}/ocaml-${PV}"
 
-# GCC 14 treats incompatible pointer types as errors; OCaml 4.05 needs relax.
+# GCC 14/15: incompatible pointer types as errors; C23 ()==(void) breaks
+# OCaml 4.05 K&R-style extern value foo(); declarations in prims.c.
 CFLAGS += " \
+    -std=gnu89 \
     -Wno-restrict \
     -Wno-error=incompatible-pointer-types \
     -Wno-incompatible-pointer-types \
@@ -34,8 +36,8 @@ do_configure() {
 }
 do_configure:append() {
     # Turn off stack-protector; inject GCC 14 relax flags into baked opts.
-    sed -i'' -re 's/NATIVECCCOMPOPTS=(.*)/NATIVECCCOMPOPTS=\1 -fno-stack-protector -fcommon -Wno-incompatible-pointer-types -Wno-int-conversion/' config/Makefile
-    sed -i'' -re 's/BYTECCCOMPOPTS=(.*)/BYTECCCOMPOPTS=\1 -fno-stack-protector -fcommon -Wno-incompatible-pointer-types -Wno-int-conversion/' config/Makefile
+    sed -i'' -re 's/NATIVECCCOMPOPTS=(.*)/NATIVECCCOMPOPTS=\1 -std=gnu89 -fno-stack-protector -fcommon -Wno-incompatible-pointer-types -Wno-int-conversion/' config/Makefile
+    sed -i'' -re 's/BYTECCCOMPOPTS=(.*)/BYTECCCOMPOPTS=\1 -std=gnu89 -fno-stack-protector -fcommon -Wno-incompatible-pointer-types -Wno-int-conversion/' config/Makefile
     # SIGSTKSZ is not a compile-time constant on modern glibc
     for f in asmrun/signals_asm.c byterun/signals.c; do
         if [ -f ${S}/$f ]; then
