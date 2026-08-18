@@ -9,21 +9,17 @@ SECTION = "ocaml/devel"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=77f085d1023152a31ada8288ffd6e8f1"
 
-# Versions are <maj>.<min>+<micro>, but the tarball uses <maj>.<min>-<micro>.
-OPV = "${@"${PV}".replace('+', '-')}"
-
 SRC_URI = " \
-    https://github.com/ocaml/camlp4/archive/${PV}.tar.gz \
+    git://github.com/ocaml/camlp4.git;protocol=https;tag=${PV};nobranch=1 \
 "
-SRC_URI[md5sum] = "0042c09026ce4b3a06d932fee864939a"
-SRC_URI[sha256sum] = "db242c0f4896ddd9dc7d6e8064cba8bf099fb9a4d4f5ed35120978501cd3a935"
+SRCREV = "75dcda0c1c3c26dc9202caece051bc1ecd7eb33f"
 
 DEPENDS = " \
     ocamlbuild-native \
     coreutils-native \
 "
 
-S = "${UNPACKDIR}/${BPN}-${OPV}"
+S = "${UNPACKDIR}/${BP}"
 
 inherit native ocaml
 

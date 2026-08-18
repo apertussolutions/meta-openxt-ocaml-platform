@@ -8,13 +8,12 @@ LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5123b1988300c0d24c79e04f09d86dc0"
 
 SRC_URI = " \
-    https://github.com/ocaml/ocamlbuild/archive/${PV}.tar.gz \
+    git://github.com/ocaml/ocamlbuild.git;protocol=https;tag=${PV};nobranch=1 \
     file://shebang-length-overflow.patch \
 "
-SRC_URI[md5sum] = "000d2ebad1333f9afcccdcd68c19f14d"
-SRC_URI[sha256sum] = "2603be3709634b6191dd00627213cff56f15200f2d0a24e0af58a18a0580b71e"
+SRCREV = "dcde2bde5f2b75b8ac4599ddce74052298420bbc"
 
-S = "${UNPACKDIR}/ocamlbuild-${PV}"
+S = "${UNPACKDIR}/${BP}"
 
 inherit native ocaml
 
