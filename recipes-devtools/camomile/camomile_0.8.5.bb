@@ -4,7 +4,7 @@ UTF-32 strings, conversion to/from about 200 encodings, collation and \
 locale-sensitive case mappings, and more."
 HOMEPAGE = "https://github.com/yoriyuki/Camomile"
 SECTION = "ocaml/devel"
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499"
 
 DEPENDS = " \

@@ -4,4 +4,4 @@ Caml Light dialect extended with a complete class-based object system and a \
 powerful module system in the style of Standard ML."
 HOMEPAGE = "https://ocaml.org/"
 SECTION = "devel/ocaml"
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPL-2.1-only"

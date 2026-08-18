@@ -4,7 +4,7 @@ each other, using a simple IPC protocol. the DBus ocaml bindings permits \
 using all DBus features from ocaml directly, in a safe fashion."
 HOMEPAGE = "http://projects.snarc.org/ocaml-dbus"
 SECTION = "ocaml/devel"
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f89276652d4738435c98d27fee7c6c7f"
 
 DEPENDS += " \

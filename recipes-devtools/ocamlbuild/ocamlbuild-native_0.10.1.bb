@@ -3,7 +3,7 @@ DESCRIPTION = "OCamlbuild is a generic build tool, that has built-in rules for \
 building OCaml library and programs."
 HOMEPAGE = "https://github.com/ocaml/ocamlbuild"
 SECTION = "devel/ocaml"
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPL-2.1-only"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5123b1988300c0d24c79e04f09d86dc0"
 
