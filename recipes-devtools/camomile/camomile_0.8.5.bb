@@ -48,8 +48,10 @@ PARALLEL_MAKE = ""
 # custom-links .byte executables with the target dynamic linker
 # (/lib/ld-linux-x86-64.so.2), which is absent on Debian/Ubuntu hosts
 # (see ocaml-cross / ocaml.bbclass). Host-native OCaml produces ocamlrun
-# scripts; bytecode libraries are architecture-independent. Skip `opt`
-# so host-arch .cmxa is not installed into the target sysroot.
+# scripts; bytecode libraries are architecture-independent.
+#
+# After data/tools are ready, build target `opt` (.cmxa) with the cross
+# ocamlopt so consumers such as dbd can link native programs.
 do_compile() {
     export OCAMLLIB="${STAGING_LIBDIR_NATIVE}/ocaml"
     export OCAML_TOPLEVEL_PATH="${STAGING_LIBDIR_NATIVE}"
@@ -59,6 +61,12 @@ do_compile() {
     oe_runmake byte unidata unimaps charmap_data locale_data \
         OCAMLC="${STAGING_BINDIR_NATIVE}/ocamlc" \
         OCAMLOPT="${STAGING_BINDIR_NATIVE}/ocamlopt"
+
+    export OCAMLLIB="${STAGING_LIBDIR_NATIVE}/${TARGET_SYS}/ocaml"
+    export OCAML_TOPLEVEL_PATH="${STAGING_LIBDIR_NATIVE}/${TARGET_SYS}"
+    oe_runmake opt \
+        OCAMLC="${OCAMLC}" \
+        OCAMLOPT="${OCAMLOPT}"
 }
 
 do_install() {
