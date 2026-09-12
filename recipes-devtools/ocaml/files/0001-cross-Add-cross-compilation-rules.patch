@@ -15,13 +15,11 @@ Signed-off-by: Eric Chanudet <chanudete@ainfosec.com>
  Makefile | 35 ++++++++++++++++++++++++++++++++++-
  1 file changed, 34 insertions(+), 1 deletion(-)
 
-Index: ocaml-4.04.2/Makefile
-===================================================================
---- ocaml-4.04.2.orig/Makefile
-+++ ocaml-4.04.2/Makefile
-@@ -198,6 +198,42 @@ base.opt:
- 	$(MAKE) ocamlopt.opt
- 	$(MAKE) otherlibrariesopt
+--- a/Makefile
++++ b/Makefile
+@@ -590,6 +590,42 @@ endif
+ 	  cp flexdll/flexdll_*.$(O) "$(INSTALL_FLEXDLL)" ; \
+ 	fi
  
 +# Cross compilation support.
 +cross-all:
@@ -60,9 +58,9 @@ Index: ocaml-4.04.2/Makefile
 +
 +
  # Installation
- 
- COMPLIBDIR=$(LIBDIR)/compiler-libs
-@@ -225,7 +261,7 @@ install:
+ .PHONY: install
+ install:
+@@ -599,7 +635,7 @@ install:
  	$(MKDIR) "$(INSTALL_COMPLIBDIR)"
  	cp VERSION "$(INSTALL_LIBDIR)"
  	$(MAKE) -C byterun install
@@ -71,10 +69,11 @@ Index: ocaml-4.04.2/Makefile
  	cp ocamlc "$(INSTALL_BINDIR)/ocamlc.byte$(EXE)"
  	$(MAKE) -C stdlib install
  	cp lex/ocamllex "$(INSTALL_BINDIR)/ocamllex.byte$(EXE)"
-@@ -778,5 +814,6 @@ distclean:
- 	rm -f ocaml ocamlc
- 	rm -f testsuite/_log
+@@ -676,6 +712,7 @@ installopt:
+ 	fi
+ 
  
 +.PHONY: cross-all cross-opt cross-boot
  
- include .depend
+ .PHONY: installoptopt
+ installoptopt:
