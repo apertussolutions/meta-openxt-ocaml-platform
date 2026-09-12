@@ -33,6 +33,10 @@ FILES:${PN}-dbg = " \
     /usr/src/debug \
 "
 
+# ocamlc embeds TMPDIR in bytecode archives and static libs.
+INSANE_SKIP:${PN}-dev += "buildpaths"
+INSANE_SKIP:${PN}-staticdev += "buildpaths"
+
 do_amend_findlib_conf() {
     sed -i \
         -e 's|^destdir=.*|destdir="${D}${sitelibdir}"|' \
