@@ -73,4 +73,4 @@ do_install() {
     oe_runmake DESTDIR="${D}" install
 }
 
-INSANE_SKIP:${PN}-dev = "file-rdeps"
+INSANE_SKIP:${PN}-dev += "file-rdeps"
