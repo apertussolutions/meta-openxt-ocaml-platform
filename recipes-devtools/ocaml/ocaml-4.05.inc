@@ -63,7 +63,8 @@ do_configure:append() {
             HAS_GETTIMEOFDAY HAS_MKTIME HAS_TM_ISDST HAS_TM_GMTOFF \
             HAS_SOCKET HAS_SOCKLEN_T HAS_UNIX_SOCKETS \
             HAS_SYMLINK HAS_READLINK HAS_LINK HAS_REALPATH \
-            HAS_CHOWN HAS_FCHMOD HAS_FCHOWN HAS_LSTAT HAS_TRUNCATE64
+            HAS_CHOWN HAS_FCHMOD HAS_FCHOWN HAS_LSTAT HAS_TRUNCATE64 \
+            HAS_SETSID HAS_GETHOSTNAME
         do
             grep -q "$def" ${S}/config/s.h || echo "#define $def" >> ${S}/config/s.h
         done
